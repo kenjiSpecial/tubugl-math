@@ -1,3 +1,5 @@
+import { mat4 } from 'gl-matrix';
+
 export class Vector3 {
 	constructor(x = 0, y = 0, z = 0) {
 		this.needsUpdate = true;
@@ -7,12 +9,14 @@ export class Vector3 {
 		this._z = z;
 
 		this.array = new Float32Array([x, y, z]);
+		this.matrix = mat4.create();
 	}
 	set x(value) {
 		this.needsUpdate = true;
 		this._x = value;
 		this.array[0] = value;
-		// console.log(value);
+
+		this.update();
 	}
 	get x() {
 		return this._x;
@@ -21,6 +25,8 @@ export class Vector3 {
 		this.needsUpdate = true;
 		this._y = value;
 		this.array[1] = value;
+
+		this.update();
 	}
 	get y() {
 		return this._y;
@@ -29,8 +35,13 @@ export class Vector3 {
 		this.needsUpdate = true;
 		this._z = value;
 		this.array[2] = value;
+
+		this.update();
 	}
 	get z() {
 		return this._z;
+	}
+	update() {
+		mat4.fromTranslation(this.matrix, this.array);
 	}
 }
