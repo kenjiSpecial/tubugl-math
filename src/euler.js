@@ -8,10 +8,40 @@ import { mathUtils } from 'tubugl-utils';
 
 export class Euler {
 	constructor(x = 0, y = 0, z = 0, order = 'XYZ') {
-		this.x = x;
-		this.y = y;
-		this.z = z;
+		this._x = x;
+		this._y = y;
+		this._z = z;
+		this.array = new Float32Array(3);
 		this.order = order;
+
+		this.update();
+	}
+
+	set x(value) {
+		this._x = value;
+		this.update();
+	}
+
+	get x() {
+		return this._x;
+	}
+
+	set y(value) {
+		this._y = value;
+		this.update();
+	}
+
+	get y() {
+		return this._y;
+	}
+
+	set z(value) {
+		this._z = value;
+		this.update();
+	}
+
+	get z() {
+		return this._z;
 	}
 
 	setFromRotationMatrix(m, order) {
@@ -32,64 +62,64 @@ export class Euler {
 		order = order || this.order;
 
 		if (order === 'XYZ') {
-			this.y = Math.asin(mathUtils.clamp(m13, -1, 1));
+			this._y = Math.asin(mathUtils.clamp(m13, -1, 1));
 
 			if (Math.abs(m13) < 0.99999) {
-				this.x = Math.atan2(-m23, m33);
-				this.z = Math.atan2(-m12, m11);
+				this._x = Math.atan2(-m23, m33);
+				this._z = Math.atan2(-m12, m11);
 			} else {
-				this.x = Math.atan2(m32, m22);
-				this.z = 0;
+				this._x = Math.atan2(m32, m22);
+				this._z = 0;
 			}
 		} else if (order === 'YXZ') {
-			this.x = Math.asin(-mathUtils.clamp(m23, -1, 1));
+			this._x = Math.asin(-mathUtils.clamp(m23, -1, 1));
 
 			if (Math.abs(m23) < 0.99999) {
-				this.y = Math.atan2(m13, m33);
-				this.z = Math.atan2(m21, m22);
+				this._y = Math.atan2(m13, m33);
+				this._z = Math.atan2(m21, m22);
 			} else {
-				this.y = Math.atan2(-m31, m11);
-				this.z = 0;
+				this._y = Math.atan2(-m31, m11);
+				this._z = 0;
 			}
 		} else if (order === 'ZXY') {
-			this.x = Math.asin(mathUtils.clamp(m32, -1, 1));
+			this._x = Math.asin(mathUtils.clamp(m32, -1, 1));
 
 			if (Math.abs(m32) < 0.99999) {
-				this.y = Math.atan2(-m31, m33);
-				this.z = Math.atan2(-m12, m22);
+				this._y = Math.atan2(-m31, m33);
+				this._z = Math.atan2(-m12, m22);
 			} else {
-				this.y = 0;
-				this.z = Math.atan2(m21, m11);
+				this._y = 0;
+				this._z = Math.atan2(m21, m11);
 			}
 		} else if (order === 'ZYX') {
-			this.y = Math.asin(-mathUtils.clamp(m31, -1, 1));
+			this._y = Math.asin(-mathUtils.clamp(m31, -1, 1));
 
 			if (Math.abs(m31) < 0.99999) {
-				this.x = Math.atan2(m32, m33);
-				this.z = Math.atan2(m21, m11);
+				this._x = Math.atan2(m32, m33);
+				this._z = Math.atan2(m21, m11);
 			} else {
-				this.x = 0;
-				this.z = Math.atan2(-m12, m22);
+				this._x = 0;
+				this._z = Math.atan2(-m12, m22);
 			}
 		} else if (order === 'YZX') {
-			this.z = Math.asin(mathUtils.clamp(m21, -1, 1));
+			this._z = Math.asin(mathUtils.clamp(m21, -1, 1));
 
 			if (Math.abs(m21) < 0.99999) {
-				this.x = Math.atan2(-m23, m22);
-				this.y = Math.atan2(-m31, m11);
+				this._x = Math.atan2(-m23, m22);
+				this._y = Math.atan2(-m31, m11);
 			} else {
-				this.x = 0;
-				this.y = Math.atan2(m13, m33);
+				this._x = 0;
+				this._y = Math.atan2(m13, m33);
 			}
 		} else if (order === 'XZY') {
-			this.z = Math.asin(-mathUtils.clamp(m12, -1, 1));
+			this._z = Math.asin(-mathUtils.clamp(m12, -1, 1));
 
 			if (Math.abs(m12) < 0.99999) {
-				this.x = Math.atan2(m32, m22);
-				this.y = Math.atan2(m13, m11);
+				this._x = Math.atan2(m32, m22);
+				this._y = Math.atan2(m13, m11);
 			} else {
-				this.x = Math.atan2(-m23, m33);
-				this.y = 0;
+				this._x = Math.atan2(-m23, m33);
+				this._y = 0;
 			}
 		} else {
 			console.warn('THREE.Euler: .setFromRotationMatrix() given unsupported order: ' + order);
@@ -97,7 +127,15 @@ export class Euler {
 
 		this._order = order;
 
+		this.update();
+
 		return this;
+	}
+
+	update() {
+		this.array[0] = this._x;
+		this.array[1] = this._z;
+		this.array[2] = this._y;
 	}
 
 	toMatrix4(out) {

@@ -14,7 +14,7 @@ test('makeRotationFromEuler equals matrix.rotateX->rotateY->rotateZ', () => {
 	expect(mat).toEqual(eulerMat);
 });
 
-test('', () => {
+test('setFromRotationMatrix works', () => {
 	var euler = new Euler();
 	var rotMat = new Float32Array([
 		0.936293363571167,
