@@ -44,4 +44,15 @@ export class Vector3 {
 	update() {
 		mat4.fromTranslation(this.matrix, this.array);
 	}
+	setArray(arr) {
+		this._x = arr[0];
+		this._y = arr[1];
+		this._z = arr[2];
+
+		this.array[0] = arr[0];
+		this.array[1] = arr[1];
+		this.array[2] = arr[2];
+
+		update();
+	}
 }
