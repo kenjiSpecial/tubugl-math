@@ -138,7 +138,14 @@ export class Euler {
 		this.array[1] = this._y;
 		this.array[2] = this._z;
 
-		Euler.makeRotationFromEuler(this.matrix, this);
+		this.needsMatrixUpdate = true;
+	}
+
+	updateMatrix(isForceUpdate) {
+		if (this.needsMatrixUpdate || isForceUpdate) {
+			Euler.makeRotationFromEuler(this.matrix, this);
+			this.needsMatrixUpdate = false;
+		}
 	}
 
 	toMatrix4(out) {
