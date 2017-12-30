@@ -1,6 +1,6 @@
 {
   "name": "tubugl-math",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "math modules for tubugl",
   "main": "index.js",
   "license": "MIT",
@@ -13,16 +13,14 @@
     "gl-matrix": "^2.4.0",
     "gsap": "^1.20.3",
     "stats.js": "https://github.com/mrdoob/stats.js.git",
-    "tubugl-core": "https://github.com/kenjiSpecial/tubugl-core.git",
+    "tubugl-core": "^1.1.0",
     "tubugl-utils": "^1.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-jest": "^22.0.4",
     "babel-preset-es2015": "^6.24.1",
-    "jest": "^22.0.4",
-    "jest-cli": "^22.0.4",
-    "regenerator-runtime": "^0.11.1"
+    "jest": "^22.0.4"
   },
   "jest": {
     "transformIgnorePatterns": [
