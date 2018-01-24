@@ -1,6 +1,6 @@
 {
   "name": "tubugl-math",
-  "version": "1.1.8",
+  "version": "1.1.9",
   "description": "math modules for tubugl",
   "main": "index.js",
   "license": "MIT",
