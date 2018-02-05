@@ -53,6 +53,6 @@ export class Vector3 {
 		this.array[1] = arr[1];
 		this.array[2] = arr[2];
 
-		update();
+		this.update();
 	}
 }
