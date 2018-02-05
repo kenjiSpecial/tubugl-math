@@ -4,6 +4,7 @@
   "description": "math modules for tubugl",
   "main": "index.js",
   "license": "MIT",
+  "repository": "kenjiSpecial/tubugl-math",
   "scripts": {
     "app00": "parcel examples/app00/index.html --no-hmr",
     "test": "jest"
