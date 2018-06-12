@@ -1,9 +1,9 @@
 {
   "name": "tubugl-math",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "math modules for tubugl",
   "cjs": "build/tubu-math.cjs.js",
-  "module": "build/tubu-math.esm.js",
+  "ejs": "build/tubu-math.esm.js",
   "main": "build/tubu-math.js",
   "libName": "Tubu",
   "license": "MIT",
